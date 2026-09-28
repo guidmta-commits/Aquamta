@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aquamta - Hivatalos Weboldal</title>
+    <style>
+        :root {
+            --bg-color: #0b0b0b;
+            --card-bg: #141414;
+            --card-border: #222222;
+            --accent-red: #e53935;
+            --accent-red-hover: #c62828;
+            --text-main: #ffffff;
+            --text-muted: #a0a0a0;
+            --green-online: #4caf50;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
+
+        /* Top Banner with 2 logos and carousel */
+        .top-banner-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #050505;
+            padding: 30px 40px;
+            border-bottom: 2px solid #1a1a1a;
+            gap: 20px;
+        }
+
+        .side-logo {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .side-logo img {
+            width: 140px;
+            height: 140px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 10px rgba(0, 255, 128, 0.2));
+        }
+
+        .carousel-wrapper {
+            flex: 2;
+            max-width: 650px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .carousel-title {
+            color: var(--accent-red);
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            background-color: #444;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .dot.active {
+            background-color: var(--accent-red);
+        }
+
+        /* Navigation Bar */
+        nav {
+            background-color: #101010;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 25px;
+            padding: 15px 20px;
+            border-bottom: 1px solid #222;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            flex-wrap: wrap;
+        }
+
+        .nav-brand {
+            display: none; /* Has icon on sides already */
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--text-main);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 50px 20px;
+        }
+
+        /* Welcome Section */
+        .welcome-section {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .welcome-section h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .welcome-section p {
+            color: var(--text-muted);
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .online-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        .online-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--green-online);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--green-online);
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            background-color: var(--accent-red);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            transition: background-color 0.2s, transform 0.1s;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-red-hover);
+        }
+
+        .btn-secondary {
+            background-color: #1c1c1c;
+            border: 1px solid #333;
+        }
+
+        .btn-secondary:hover {
+            background-color: #262626;
+        }
+
+        /* How to Join Section */
+        .section-title {
+            text-align: center;
+            font-size: 26px;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 35px;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 60px;
+        }
+
+        .step-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 30px 20px;
+            text-align: center;
+            position: relative;
+            transition: border-color 0.2s;
+        }
+
+        .step-card:hover {
+            border-color: #444;
+        }
+
+        .step-number {
+            width: 32px;
+            height: 32px;
+            background-color: var(--accent-red);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin: 0 auto 15px auto;
+            font-size: 14px;
+        }
+
+        .step-card h3 {
+            font-size: 17px;
+            margin-bottom: 10px;
+        }
+
+        .step-card p {
+            color: var(--text-muted);
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .step-card a {
+            color: var(--accent-red);
+            text-decoration: none;
+        }
+
+        /* Values Section */
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 60px;
+        }
+
+        .value-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .value-icon {
+            font-size: 28px;
+            color: var(--accent-red);
+            margin-bottom: 15px;
+        }
+
+        .value-card h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .value-card p {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        /* Server Stats Section */
+        .stats-container {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 60px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .stat-box {
+            background-color: #101010;
+            border: 1px solid #1f1f1f;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .stat-value {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .stat-value.offline {
+            color: #ff5252;
+        }
+
+        /* Team Section - Empty as requested */
+        .team-section {
+            margin-bottom: 60px;
+            text-align: center;
+        }
+
+        .team-grid {
+            min-height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-muted);
+            font-style: italic;
+            background: var(--card-bg);
+            border: 1px dashed var(--card-border);
+            border-radius: 12px;
+            padding: 40px;
+        }
+
+        /* FAQ Section */
+        .faq-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 60px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .faq-item {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            padding: 16px 20px;
+            cursor: pointer;
+            font-weight: 500;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-item:hover {
+            border-color: #444;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: var(--text-muted);
+            font-size: 13px;
+            border-top: 1px solid var(--card-border);
+            background-color: #070707;
+        }
+
+        /* Floating Discord Button */
+        .floating-discord {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background-color: #5865F2;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(88, 101, 242, 0.4);
+            z-index: 999;
+            transition: background-color 0.2s;
+        }
+
+        .floating-discord:hover {
+            background-color: #4752c4;
+        }
+
+        @media (max-width: 768px) {
+            .top-banner-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Banner with Side Logos & Center Carousel -->
+    <div class="top-banner-container">
+        <!-- Left Logo -->
+        <div class="side-logo">
+            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><polygon points='50,10 90,30 90,70 50,90 10,70 10,30' fill='none' stroke='%2326a69a' stroke-width='8'/><text x='50' y='68' font-size='50' font-weight='bold' fill='%2326a69a' text-anchor='middle' font-family='sans-serif'>A</text></svg>" alt="Aquamta Logo">
+        </div>
+
+        <!-- Center Image Carousel -->
+        <div class="carousel-wrapper">
+            <div class="carousel-title" id="carousel-title">Aquamta - Városkép</div>
+            <div class="carousel-dots">
+                <span class="dot active" onclick="setSlide(0)"></span>
+                <span class="dot" onclick="setSlide(1)"></span>
+                <span class="dot" onclick="setSlide(2)"></span>
+                <span class="dot" onclick="setSlide(3)"></span>
+                <span class="dot" onclick="setSlide(4)"></span>
+            </div>
+        </div>
+
+        <!-- Right Logo -->
+        <div class="side-logo">
+            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><polygon points='50,10 90,30 90,70 50,90 10,70 10,30' fill='none' stroke='%2326a69a' stroke-width='8'/><text x='50' y='68' font-size='50' font-weight='bold' fill='%2326a69a' text-anchor='middle' font-family='sans-serif'>A</text></svg>" alt="Aquamta Logo">
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="#forum">💬 Fórum</a>
+        <a href="#ucp">👤 UCP</a>
+        <a href="#csatlakozas">▶ Csatlakozás</a>
+        <a href="#statisztika">📊 Statisztika</a>
+        <a href="#csapat">👥 Csapat</a>
+        <a href="#gyik">⚙ GYIK</a>
+        <a href="#jatekosaink">👥 Játékosaink</a>
+        <a href="#kapcsolat">✉ Kapcsolat</a>
+        <a href="#social">🌐 Social Media</a>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container">
+
+        <!-- Welcome Section -->
+        <div class="welcome-section">
+            <h1>Üdvözlünk a Aquamta hivatalos weboldalán!</h1>
+            <p>A Aquamta egy Multi Theft Auton működő RolePlay szerver.</p>
+            <div class="online-badge">
+                <span class="online-dot"></span> Jelenleg: 0/1024 játékos online
+            </div>
+            <div class="btn-group">
+                <a href="#" class="btn">💬 Csatlakozz Discordra</a>
+                <a href="#" class="btn btn-secondary">👤 UCP megnyitása</a>
+            </div>
+        </div>
+
+        <!-- How to join -->
+        <h2 class="section-title" id="csatlakozas">Hogyan csatlakozz?</h2>
+        <p class="section-subtitle">Néhány egyszerű lépésben játszhatsz velünk</p>
+
+        <div class="steps-grid">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h3>MTA letöltése</h3>
+                <p>Töltsd le a <a href="#">Multi Theft Auto</a> klienst, és telepítsd.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h3>Csatlakozás a szerverhez</h3>
+                <p>Nyisd meg az MTA-t, válaszd a „Gyors csatlakozás” opciót, és add meg az IP-t: <br><b>[HAMAROSAN]</b></p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h3>Szabályzat</h3>
+                <p>Olvasd el a szerver szabályzatainkat. <a href="#">Kattints ide</a>.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">4</div>
+                <h3>Regisztráció</h3>
+                <p>Az első belépéskor regisztrálj a szerveren.</p>
+            </div>
+        </div>
+
+        <!-- Values -->
+        <div class="values-grid">
+            <div class="value-card">
+                <div class="value-icon">🛡️</div>
+                <h3>RP minőség</h3>
+                <p>Szabályozott, valósághű szerepjáték élmény.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">👥</div>
+                <h3>Közösség</h3>
+                <p>Aktív, segítőkész és barátságos játékosok.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">⚡</div>
+                <h3>Stabilitás</h3>
+                <p>Folyamatos fejlesztés és megbízható üzemelés.</p>
+            </div>
+        </div>
+
+        <!-- Server Statistics -->
+        <div class="stats-container" id="statisztika">
+            <h2 class="section-title" style="margin-bottom: 5px;">Szerver statisztika</h2>
+            <p class="section-subtitle">Élő adatok a szerverről</p>
+
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="stat-label">Státusz</div>
+                    <div class="stat-value offline">OFFLINE</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Játékosok</div>
+                    <div class="stat-value">0 / 1024</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Szerver név</div>
+                    <div class="stat-value" style="font-size: 14px;">[HUN] Aquamta | Hamarosan</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Legtöbb játékos elmúlt 24 órában</div>
+                    <div class="stat-value">N/A</div>
+                </div>
+                <div class="stat-box" style="grid-column: span 2;">
+                    <div class="stat-label">Szerver IP</div>
+                    <div class="stat-value" style="font-size: 15px;">Hamarosan elérhető</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Team Section (Empty as requested) -->
+        <div class="team-section" id="csapat">
+            <h2 class="section-title" style="margin-bottom: 5px;">Ismerd meg a csapatot</h2>
+            <p class="section-subtitle">Akik mögöttünk állnak</p>
+            <div class="team-grid">
+                A csapat tagjai hamarosan feltöltésre kerülnek...
+            </div>
+        </div>
+
+        <!-- FAQ Section -->
+        <h2 class="section-title" id="gyik">Gyakori kérdések</h2>
+        <p class="section-subtitle">Röviden a legfontosabb információk</p>
+
+        <div class="faq-container">
+            <div class="faq-item">Mi az MTA és mi az Aquamta? <span>▼</span></div>
+            <div class="faq-item">Kell-e a játék (GTA: SA) is? <span>▼</span></div>
+            <div class="faq-item">Ingyenes a játék? <span>▼</span></div>
+            <div class="faq-item">Hol találom a szabályokat? <span>▼</span></div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        © 2026 Aquamta. Minden jog fenntartva.
+    </footer>
+
+    <!-- Floating Discord -->
+    <a href="#" class="floating-discord">
+        💬 Csatlakozz Discordra
+    </a>
+
+    <script>
+        // Simple Carousel text changer
+        const titles = [
+            "Aquamta - Városkép",
+            "Aquamta - San Fierro",
+            "Aquamta - Los Santos",
+            "Aquamta - Vidék",
+            "Aquamta - Fő tér"
+        ];
+        let currentSlide = 0;
+        const titleElement = document.getElementById('carousel-title');
+        const dots = document.querySelectorAll('.dot');
+
+        function setSlide(index) {
+            currentSlide = index;
+            titleElement.textContent = titles[currentSlide];
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentSlide);
+            });
+        }
+
+        // Auto slide every 4 seconds
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % titles.length;
+            setSlide(currentSlide);
+        }, 4000);
+    </script>
+</body>
+</html>
